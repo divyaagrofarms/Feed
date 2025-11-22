@@ -864,6 +864,7 @@ textarea:focus {
   white-space: nowrap;
   animation: scroll-left 12s linear infinite;
   font-size: 20px;
+  color: #663300;
 }
 
 @keyframes scroll-left {
@@ -874,4 +875,5 @@ textarea:focus {
     transform: translateX(-100%);
   }
 }
+
 
