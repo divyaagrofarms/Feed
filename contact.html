@@ -35,7 +35,7 @@
         <span></span>
       </button>
     </nav>
-    <div class="mobile-nav">
+   <div class="mobile-nav">
       <div class="mobile-nav-inner">
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
@@ -43,10 +43,10 @@
         <a href="services.html">Services</a>
         <a href="contact.html">Contact</a>
       </div>
-    </div>
+    </div> 
   </div>
   <div class="scroll-container">
-  <div class="scroll-text">Welcome to Divya AgroMaxx Feed — Premium Livestock Nutrition!</div>
+  <div class="scroll-text">Welcome to <b>Divya AgroMaxx Feed</b> — Premium Livestock Nutrition!</div>
 </div>
 </header>
 
@@ -54,13 +54,13 @@
   <section class="section">
     <div class="container">
       <div class="section-heading">
+        <div class="contact-card">
         <h2>Reach our team</h2>
         <p>Share a few details about your farm or requirement. The Divya AgroMaxx Feed team will get in touch with you.</p>
       </div>
 
       <div class="contact-wrapper">
         <div class="contact-card">
-          <form id="enquiryForm">
             <div class="form-grid">
               <div class="form-group">
                 <label for="name">Full name</label>
@@ -76,7 +76,7 @@
               </div>
               <div class="form-group">
                 <label for="state">State / region</label>
-                <input type="text" id="state" name="state" placeholder="e.g. Maharashtra">
+                <input type="text" id="state" name="state" placeholder="e.g. Telangana">
               </div>
               <div class="form-group">
                 <label for="species">Species</label>
@@ -90,24 +90,16 @@
                   <option>Other</option>
                 </select>
               </div>
-              <div class="form-group">
-                <label for="scale">Farm scale</label>
-                <select id="scale" name="scale">
-                  <option value="">Select</option>
-                  <option>Small (up to 100 head/birds)</option>
-                  <option>Medium (100–500)</option>
-                  <option>Large (500+)</option>
-                  <option>Commercial integrator</option>
-                </select>
-              </div>
               <div class="form-group full">
                 <label for="message">Requirement / query</label>
-                <textarea id="message" name="message" rows="4" placeholder="Share your current feed program, challenges and goals."></textarea>
+                <textarea id="message" name="message" rows="4" placeholder="Share your feed Requirement / Message."></textarea>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" style="margin-top:1rem;">Submit enquiry</button>
-          </form>
-        </div>
+           
+            <button onclick="sendData()"  class="btn btn-primary" style="margin-top:1rem;">Send</button>
+           <div id="response"></div>
+             </div>
+      
 
         <div>
           <h3>Direct contact details</h3>
@@ -118,14 +110,14 @@
             <div class="contact-badge">Helpline: +91-9966966538</div>
           </div>
           <p class="text-muted" style="margin-top:0.8rem;">
-            Email: support@divyaagrofeeds.com<br>
+            Email: divyaagrofarmstr@gmail.com<br>
             Working hours: Monday to Saturday, 9:00–18:00 IST
           </p>
           <h4 style="margin-top:1.4rem;">Registered office</h4>
           <p class="text-muted">
             Divya Agro Feeds<br>
-            NH Road, Industrial Estate,<br>
-            Your City, Your State, India.
+            Nagarkurnool,<br>
+            Telangana, India.
           </p>
         </div>
       </div>
@@ -177,10 +169,57 @@
 </footer>
 
 <script>
-  const y = document.getElementById("yearSpan");
-  if (y) y.textContent = new Date().getFullYear();
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzGaFHhSpxN2rO9CI3iTh6hY7nihXg8kxpwernKQN-9HRVpz9kSzZ296qvW3lIq45Q-9Q/exec"; 
+    // Example: https://script.google.com/macros/s/AKfycbxxxxxxx/exec
+    function sendData() {
+    const name = document.getElementById("name");
+    const phone = document.getElementById("phone");
+    const email = document.getElementById("email");
+    const state = document.getElementById("state");
+    const species = document.getElementById("species");
+    const message = document.getElementById("message");
+    const responseBox = document.getElementById("response");
+
+    if (!name.value.trim() || !email.value.trim()) {
+        responseBox.innerHTML = "<p class='error'>Name and email are required.</p>";
+        return;
+    }
+
+    const payload = {
+        name: name.value,
+        phone: phone.value,
+        email: email.value,
+        state: state.value,
+        species: species.value,
+        message: message.value
+    };
+
+    responseBox.innerHTML = "<p>Sending...</p>";
+
+    fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",   // If needed for local file
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        responseBox.innerHTML = "<p class='success'>Data sent successfully!</p>";
+
+        // 🔥 Reset form fields
+        name.value = "";
+        phone.value = "";
+        email.value = "";
+        state.value = "";
+        species.value = "";
+        message.value = "";
+
+    })
+    .catch((err) => {
+        responseBox.innerHTML = "<p class='error'>Request failed: " + err + "</p>";
+    });
+}
+        
 </script>
-<script src="main.js"></script>
+
 </body>
 </html>
-
