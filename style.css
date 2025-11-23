@@ -14,7 +14,7 @@ html {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #1e293b;
-  background: #fccf5e4;
+  background:  #ccf5e4;
   line-height: 1.6;
 }
 
@@ -875,6 +875,7 @@ textarea:focus {
     transform: translateX(-100%);
   }
 }
+
 
 
 
