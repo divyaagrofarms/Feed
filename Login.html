@@ -1,0 +1,335 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divya AgroMaxx Feed - Inventory</title>
+    <style>
+      /*  body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; }  */
+        body { font-family: sans-serif; padding: 20px; background-color: #ECFFF3; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Login Styles */
+        #login-section { text-align: center; margin-top: 50px; background-color: #28a745;}
+        input { padding: 10px; margin: 5px; border: 1px solid #ddd; border-radius: 4px; width: 200px; }
+        button { padding: 10px 20px; background-color: #fa5407; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #4b38f7; }
+        button.delete { background-color: #dc3545; }
+        button.edit { background-color: #ffc107; color: black; }
+
+        /* Dashboard Styles */
+        .dashboard { display: flex; gap: 20px; margin-bottom: 20px; padding: 15px; background: #e9ecef; border-radius: 5px; }
+        .card { flex: 1; background: rgb(149, 236, 215); padding: 15px; border-radius: 5px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .card h3 { margin: 0 0 10px 0; font-size: 14px; color: #666; }
+        .card div { font-size: 24px; font-weight: bold; color: #333; }
+
+        /* Table Styles */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+      /*  th { background-color: #f8f9fa; } */
+        th { background-color: #7df191; }
+
+        
+        /* Hidden Utilities */
+        .hidden { display: none; }
+        #loading { color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+<!-- HEADER (same snippet, set Home active) -->
+<header class="site-header">
+  <div class="container">
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="brand-mark">D</div>
+        <div class="brand-text">
+          <span>Divya AgroMaxx Feed</span>
+          <span>Balanced Nutrition. Better Yields.</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="contact.html" class="btn btn-primary">Enquire</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+      </button>
+    </nav>
+     <div class="mobile-nav">
+      <div class="mobile-nav-inner">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div> 
+  </div>
+<div class="scroll-container">
+  <div class="scroll-text">Welcome to <b>Divya AgroMaxx Feed</b> — Premium Livestock Nutrition!</div>
+</div>
+</header>
+
+
+
+
+    <div id="login-section" class="container">
+        <h2>Inventory Login</h2>
+        <input type="text" id="username" placeholder="Username" value="">
+        <br>
+        <input type="password" id="password" placeholder="Password" value="">
+        <br><br>
+        <button onclick="handleLogin()">Login</button>
+        <p id="login-msg"></p>
+    </div>
+
+    <div id="app-section" class="container hidden">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="align-items:center;"><h2><b>Divya AgroMaxx Feed</b><br>
+           <!-- <h2>Inventory Manager</h2>  -->Inventory Manager</h2></div>
+            <button onclick="logout()" style="background:#fc0404;"><b>Logout</b></button>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <h3>Total Products</h3>
+                <div id="dash-count">0</div>
+            </div>
+            <div class="card">
+                <h3>Total Stock (50kg Bags)</h3>
+                <div id="dash-qty">0</div>
+            </div>
+            <div class="card">
+                <h3>Est. Stock Value</h3>
+                <div id="dash-value">0</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>Manage Items</h3>
+        <input type="hidden" id="item-id" >
+        <input type="text" id="item-name" placeholder="Product Name">
+        <input type="number" id="item-qty" placeholder="Qty (50kg)">
+        <input type="number" id="item-price" placeholder="Price / 50kg">
+        <button onclick="saveItem()" id="save-btn"><b>Add Product</b></button>
+        <button onclick="cancelEdit()" id="cancel-btn" class="hidden" style="background:#6c757d;"><b>Cancel</b></button>
+        <p id="loading" class="hidden">Processing...</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Qty (50kg)</th>
+                    <th>Price/50kg</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="data-table-body">
+                </tbody>
+        </table>
+    </div>
+
+<!-- FOOTER (same as shared snippet) -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-text" style="margin-bottom:0.6rem;">
+          <span>Divya AgroMaxx Feed</span>
+          <span style="font-size:0.8rem;">Precision feed for pigs, poultry & livestock.</span>
+        </div>
+        <p>Divya AgroMaxx Feed partners with progressive farmers to deliver consistent animal performance through data-backed nutrition and field-level support.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About us</a></li>
+          <li><a href="services.html">Farmer services</a></li>
+          <li><a href="products.html">Product portfolio</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Support</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact team</a></li>
+          <li><span>Mon–Sat: 9:00–18:00 IST</span></li>
+          <li><span>Email: divyaagrofarmstr@gmail.com</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Location</div>
+        <ul class="footer-links">
+          <li>Divya AgroMaxx Feed</li>
+          <li>Nagarkurnool</li>
+          <li>Telangana, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yearSpan">2025</span> Divya AgroMaxx Feed. All rights reserved.</span>
+      <span>Developed by <b>Divya AgroMaxx Feed</b> for performance-focused farms.</span>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+    <script>
+        // PASTE YOUR DEPLOYED GOOGLE APPS SCRIPT URL HERE
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbztx00eoPNw8YkEbC7jhzorKIZc5ZvMZgoxO79rL53H_mMbtY7qyjkOIgIT7nEg-gUdag/exec';
+
+        let inventoryData = [];
+
+        // --- AUTHENTICATION ---
+        function handleLogin() {
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            const msg = document.getElementById('login-msg');
+
+            msg.innerText = "Verifying...";
+            
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ action: 'login', username: u, password: p })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('login-section').classList.add('hidden');
+                    document.getElementById('app-section').classList.remove('hidden');
+                    loadData(); // Load dashboard and table
+                } else {
+                    msg.innerText = "Incorrect credentials.";
+                }
+            });
+        }
+
+        function logout() {
+            location.reload();
+        }
+
+        // --- READ & DASHBOARD ---
+        function loadData() {
+            document.getElementById('loading').classList.remove('hidden');
+            fetch(SCRIPT_URL)
+            .then(res => res.json())
+            .then(json => {
+                inventoryData = json.data;
+                renderTable();
+                updateDashboard();
+                document.getElementById('loading').classList.add('hidden');
+            });
+        }
+
+        function updateDashboard() {
+            const totalProducts = inventoryData.length;
+            const totalQty = inventoryData.reduce((sum, item) => sum + Number(item.quantity), 0);
+            const totalValue = inventoryData.reduce((sum, item) => sum + (Number(item.quantity) * Number(item.price)), 0);
+
+            document.getElementById('dash-count').innerText = totalProducts;
+            document.getElementById('dash-qty').innerText = totalQty;
+            document.getElementById('dash-value').innerText = "₹" + totalValue.toLocaleString();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('data-table-body');
+            tbody.innerHTML = '';
+            
+            inventoryData.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>₹${item.price}</td>
+                    <td>
+                        <button class="edit" onclick="editItem(${item.id})">Edit</button>
+                        <button class="delete" onclick="deleteItem(${item.id})">Delete</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // --- CREATE & UPDATE ---
+        function saveItem() {
+            const id = document.getElementById('item-id').value;
+            const name = document.getElementById('item-name').value;
+            const qty = document.getElementById('item-qty').value;
+            const price = document.getElementById('item-price').value;
+
+            if(!name || !qty || !price) return alert("Please fill all fields");
+
+            const action = id ? 'update' : 'create';
+            const payload = { action: action, id: id, name: name, quantity: qty, price: price };
+
+            document.getElementById('loading').classList.remove('hidden');
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(response => {
+                if(response.status === 'success') {
+                    clearForm();
+                    loadData();
+                } else {
+                    alert('Error: ' + response.message);
+                }
+            });
+        }
+
+        function editItem(id) {
+            const item = inventoryData.find(i => i.id == id);
+            if(item) {
+                document.getElementById('item-id').value = item.id;
+                document.getElementById('item-name').value = item.name;
+                document.getElementById('item-qty').value = item.quantity;
+                document.getElementById('item-price').value = item.price;
+                
+                document.getElementById('save-btn').innerText = "Update Item";
+                document.getElementById('cancel-btn').classList.remove('hidden');
+            }
+        }
+
+        function cancelEdit() {
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById('item-id').value = '';
+            document.getElementById('item-name').value = '';
+            document.getElementById('item-qty').value = '';
+            document.getElementById('item-price').value = '';
+            document.getElementById('save-btn').innerText = "Add Product";
+            document.getElementById('cancel-btn').classList.add('hidden');
+        }
+
+        // --- DELETE ---
+        function deleteItem(id) {
+            if(!confirm("Are you sure you want to delete this item?")) return;
+
+            document.getElementById('loading').classList.remove('hidden');
+            
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({ action: 'delete', id: id })
+            })
+            .then(res => res.json())
+            .then(response => {
+                loadData();
+            });
+        }
+    </script>
+</body>
+</html>

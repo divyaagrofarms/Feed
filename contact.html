@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contact | Divya AgroMaxx Feed</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Contact Divya AgroMaxx Feed for feed enquiries, technical advisory or partnership discussions.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER (Contact active) -->
+<header class="site-header">
+  <div class="container">
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="brand-mark">D</div>
+        <div class="brand-text">
+          <span>Divya AgroMaxx Feed</span>
+          <span>Balanced Nutrition. Better Yields.</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="Login.html">Admin</a>
+      </div>
+      <div class="nav-cta">
+        <div class="phone">Helpline: <strong>+91-9966966538</strong></div>
+        <a href="contact.html" class="btn btn-primary">Enquire</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+      </button>
+    </nav>
+   <div class="mobile-nav">
+      <div class="mobile-nav-inner">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="products.html">Products</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <a href="Login.html">Admin</a>
+      </div>
+    </div> 
+  </div>
+  <div class="scroll-container">
+  <div class="scroll-text">Welcome to <b>Divya AgroMaxx Feed</b> — Premium Livestock Nutrition!</div>
+</div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div class="contact-card">
+        <h2>Reach our team</h2>
+        <p>Share a few details about your farm or requirement. The Divya AgroMaxx Feed team will get in touch with you.</p>
+      </div>
+
+      <div class="contact-wrapper">
+        <div class="contact-card">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" required placeholder="Farmer / company name">
+              </div>
+              <div class="form-group">
+                <label for="phone">Mobile number</label>
+                <input type="tel" id="phone" name="phone" required placeholder="+91">
+              </div>
+              <div class="form-group">
+                <label for="email">Email (optional)</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com">
+              </div>
+              <div class="form-group">
+                <label for="state">State / region</label>
+                <input type="text" id="state" name="state" placeholder="e.g. Telangana">
+              </div>
+              <div class="form-group">
+                <label for="species">Species</label>
+                <select id="species" name="species">
+                  <option value="">Select Animal</option>
+                  <option>Pig</option>
+                  <option>Poultry – Broiler</option>
+                  <option>Poultry – Layer</option>
+                  <option>Cattle / Dairy</option>
+                  <option>Multiple species</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group full">
+                <label for="message">Requirement / query</label>
+                <textarea id="message" name="message" rows="4" placeholder="Share your feed Requirement / Message."></textarea>
+              </div>
+            </div>
+           
+            <button onclick="sendData()"  class="btn btn-primary" style="margin-top:1rem;">Send</button>
+           <div id="response"></div>
+             </div>
+      
+
+        <div>
+          <h3>Direct contact details</h3>
+          <p class="text-muted">
+            Prefer calling or visiting? Use the details below. For plant visits, please schedule in advance.
+          </p>
+          <div style="margin-top:0.8rem;">
+            <div class="contact-badge">Helpline: +91-9966966538</div>
+          </div>
+          <p class="text-muted" style="margin-top:0.8rem;">
+            Email: <b>divyaagrofarmstr@gmail.com</b><br>
+            Working hours: <b>Monday to Saturday, 9:00–18:00 IST</b> </p>
+          </p>
+          <h4 style="margin-top:1.4rem;">Registered office</h4><b>
+          <p class="text-muted">
+            Divya Agro Feeds<br>
+            Nagarkurnool,<br>
+            Telangana, India.
+          </p></b>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand-text" style="margin-bottom:0.6rem;">
+          <span>Divya AgroMaxx Feed</span>
+          <span style="font-size:0.8rem;">Precision feed for pigs, poultry & livestock.</span>
+        </div>
+        <p>Divya AgroMaxx Feed partners with progressive farmers to deliver consistent animal performance through data-backed nutrition and field-level support.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html">About us</a></li>
+          <li><a href="services.html">Farmer services</a></li>
+          <li><a href="products.html">Product portfolio</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Support</div>
+        <ul class="footer-links">
+          <li><a href="contact.html">Contact team</a></li>
+          <li><span>Mon–Sat: 9:00–18:00 IST</span></li>
+          <li><span>Email: divyaagrofarmstr@gmail.com</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Location</div>
+        <ul class="footer-links">
+          <li>Divya AgroMaxx Feed</li>
+          <li>Nagarkurnool</li>
+          <li>Telangana, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yearSpan">2025</span> Divya AgroMaxx Feed. All rights reserved.</span>
+      <span>Developed by <b>Divya AgroMaxx Feed</b> performance-focused farms.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzGaFHhSpxN2rO9CI3iTh6hY7nihXg8kxpwernKQN-9HRVpz9kSzZ296qvW3lIq45Q-9Q/exec"; 
+    // Example: https://script.google.com/macros/s/AKfycbxxxxxxx/exec
+    function sendData() {
+    const name = document.getElementById("name");
+    const phone = document.getElementById("phone");
+    const email = document.getElementById("email");
+    const state = document.getElementById("state");
+    const species = document.getElementById("species");
+    const message = document.getElementById("message");
+    const responseBox = document.getElementById("response");
+
+    if (!name.value.trim() || !email.value.trim()) {
+        responseBox.innerHTML = "<p class='error'>Name and email are required.</p>";
+        return;
+    }
+
+    const payload = {
+        name: name.value,
+        phone: phone.value,
+        email: email.value,
+        state: state.value,
+        species: species.value,
+        message: message.value
+    };
+
+    responseBox.innerHTML = "<p>Sending...</p>";
+
+    fetch(WEB_APP_URL, {
+        method: "POST",
+        mode: "no-cors",   // If needed for local file
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    })
+    .then(() => {
+        responseBox.innerHTML = "<p class='success'>Data sent successfully!</p>";
+
+        // 🔥 Reset form fields
+        name.value = "";
+        phone.value = "";
+        email.value = "";
+        state.value = "";
+        species.value = "";
+        message.value = "";
+
+    })
+    .catch((err) => {
+        responseBox.innerHTML = "<p class='error'>Request failed: " + err + "</p>";
+    });
+}
+        
+</script>
+
+</body>
+</html>
