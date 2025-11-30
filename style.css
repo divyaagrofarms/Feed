@@ -862,7 +862,7 @@ textarea:focus {
 .scroll-text {
   display: inline-block;
   white-space: nowrap;
-  animation: scroll-left 20s linear infinite;
+  animation: scroll-left 30s linear infinite;
   font-size: 20px;
   color: #663300;
 }
@@ -875,5 +875,6 @@ textarea:focus {
     transform: translateX(-100%);
   }
 }
+
 
 
